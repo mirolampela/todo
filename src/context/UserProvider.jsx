@@ -18,9 +18,15 @@ export default function UserProvider({children}) {
     setUser(response.data)
     sessionStorage.setItem('user', JSON.stringify(response.data))
   }
+
+  const logout = () => {
+  setUser({email: "", password: ""})
+  sessionStorage.removeItem('user')
+  sessionStorage.removeItem('token')
+}
   
   return (
-    <UserContext.Provider value={{user,setUser,signUp,signIn}}>
+    <UserContext.Provider value={{user,setUser,signUp,signIn,logout}}>
       {children}
     </UserContext.Provider>
   )

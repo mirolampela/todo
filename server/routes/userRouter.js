@@ -32,6 +32,7 @@ router.post('/signup', (req, res, next) => {
 router.post('/signin', (req, res, next) => {
   const { user } = req.body
   if (!user || !user.email ||!user.password) {
+    const error = new Error('Email and password are required')
     error.status = 400
     return next(error)
   }
@@ -54,13 +55,13 @@ router.post('/signin', (req, res, next) => {
         error.status = 401
         return next(error)
       }
-    })
-
+    
     const token = sign({ user: dbUser.email }, process.env.JWT_SECRET)
     res.status(200).json({
       id: dbUser.id,
       email: dbUser.email,
       token
+      })
     })
   })
 })

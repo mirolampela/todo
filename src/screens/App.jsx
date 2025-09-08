@@ -9,7 +9,7 @@ const url = "http://localhost:3001"
 function App() {
   const [task, setTask] = useState('')
   const [tasks, setTasks] = useState([])
-  const { user } = useUser()
+  const { user, logout } = useUser()
 
   useEffect(() => {
     axios.get(url)
@@ -51,6 +51,7 @@ function App() {
   return (
     <div id="container">
       <h3>Todos</h3>
+      
       <form>
         <input 
           placeholder='Add new task'
@@ -75,6 +76,7 @@ function App() {
           ))
         }
       </ul>
+      <button onClick={logout}>Logout</button>
     </div>
   )
 }
